@@ -1,16 +1,38 @@
 import click
 
 
+# https://github.com/cookiecutter/cookiecutter/issues/1887
+def complete_scripts(ctx: click.Context, param, incomplete):
+    # print("CTX", ctx)
+    # print("PARAM", ctx.params['app'])
+    # envs = ctx.params['app'].project.config.envs
+    # envs = ctx.params
+    # ctx.params.keys()
+
+    # project.config.envs
+    # template_names = get_installed_templates(ctx.params["default_config"], ctx.params["config_file"])
+    # return [k for k in template_names if k.startswith(incomplete)]
+    # import os
+    # app.abort('Missing argument `MATRIX:ARGS...`')
+    # project.config.[envs
+    # click.echo('Hello World!')
+
+    # Unfortunately click does not pass the obj to the shell_complete ctx.
+    # return [k for k in ctx.obj.project.config.envs if k.startswith(incomplete)]
+    # ctx.obj.project.config.envs
+    return [k for k in ['test', 'lint'] if k.startswith(incomplete)]
+
+
 @click.command(
-    short_help='Run commands within project environments',
+    short_help='Run commands within project environment',
     context_settings={'help_option_names': [], 'ignore_unknown_options': True},
 )
-@click.argument('args', metavar='[ENV:]ARGS...', required=True, nargs=-1)
+@click.argument('args', metavar='[ENV:]ARGS...', required=True, nargs=-1, shell_complete=complete_scripts)
 @click.pass_obj
 @click.pass_context
-def run(ctx, app, args):
+def run(ctx: click.Context, app, args):
     """
-    Run commands within project environments.
+    Run commands within project environment.
     This is a convenience wrapper around the [`env run`](#hatch-env-run) command.
 
     If the first argument contains a colon, then the preceding component will be
@@ -50,6 +72,7 @@ def run(ctx, app, args):
     would execute `pytest` in the environments `test.py3.10-42` and `test.py3.10-3.14`.
     Note that `py` may be used as an alias for `python`.
     """
+    print(ctx.obj.project.config.envs)
     if args[0] in ('-h', '--help'):
         app.display_info(ctx.get_help())
         return

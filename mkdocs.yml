@@ -58,6 +58,7 @@ nav:
     - Community:
       - Users: community/users.md
       - Highlights: community/highlights.md
+      - Contribute: community/contributing.md
   - Configuration:
     - Metadata: config/metadata.md
     - Dependencies: config/dependency.md

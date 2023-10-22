@@ -49,7 +49,7 @@ def filter_environments(environments, filter_data):
     return selected_environments
 
 
-@click.command(short_help='Run commands within project environments')
+@click.command(short_help='Run commands within project environmentssss')
 @click.argument('args', required=True, nargs=-1)
 @click.option('--env', '-e', 'env_names', multiple=True, help='The environments to target')
 @click.option('--include', '-i', 'included_variable_specs', multiple=True, help='The matrix variables to include')
@@ -71,7 +71,7 @@ def run(
     ignore_compat,
 ):
     """
-    Run commands within project environments.
+    Run commands within project environmentsssss.
 
     The `-e`/`--env` option overrides the equivalent [root option](#hatch) and the `HATCH_ENV` environment variable.
 
